@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   height: 100vh;
   display: flex;
@@ -6,9 +10,10 @@ body {
 }
 
 .calculator {
+  background-color: #49676e;
   border: 2px solid  darkgray;
   border-radius: 10px;
-  width: 400px;
+  width: 450px;
   height: 600px;
   display: flex;
   align-items: center;
@@ -18,9 +23,16 @@ body {
 }
 
 .screen {
+  background-color: #80a782;
   border: 1px solid gray;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 30px;
   width: 400px;
   height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding: 10px;
 }
 
 .buttons {
@@ -29,4 +41,14 @@ body {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
+}
+
+button {
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+button:active {
+  background-color: aliceblue;
 }
