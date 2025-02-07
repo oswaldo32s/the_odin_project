@@ -29,10 +29,12 @@ function updateScreen() {
 }
 
 function clearVariables() {
+  firstNumber = 0;
   firstNumberNegative = false;
   firstIsDecimal = false;
   secondNumberNegative = false;
   secondIsDecimal = false;
+  secondNumber = 0;
   existOperator = false;
 }
 
