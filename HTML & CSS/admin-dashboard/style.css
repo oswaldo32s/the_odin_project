@@ -10,7 +10,75 @@ a {
 
 body {
   margin: 0;
-  display: flex;
   height: 100vh;
+  width: 100vw;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  grid-template-areas: 
+  "sidebar header header header"
+  "sidebar main main main"
+  "sidebar main main main"
+  "sidebar main main main"
+  "sidebar main main main"
+  "sidebar main main main";
+}
+
+.header {
+  grid-area: header;
+  background-color: #fff;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  background-color: #1992d4;
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+  padding: 15px;
+}
+
+.sb-box {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  cursor: pointer;
+}
+
+.box-icon {
+  width: 20px;
+  fill: #fff;
+}
+
+.box-text {
+  color: #fff;
+  font-weight: 600;
+}
+
+.dash-logo {
+  width: 50px;
+  fill: #fff;
+}
+
+.dash-title {
+  color: #fff;
+  margin: 0;
+}
+
+.sb-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 15px;
+}
+
+.main {
+  grid-area: main;
+  background-color: #e2e8f0;
+  display: grid;
+  grid-template-areas: 
+  "p p a"
+  "p p a"
+  "p p t";
 }
