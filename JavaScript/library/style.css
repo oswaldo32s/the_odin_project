@@ -1,0 +1,69 @@
+* {
+  box-sizing: border-box;
+}
+
+body { 
+  margin: 0;
+  font-family: Ubuntu, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.bookContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  padding: 15px;
+  gap: 20px;
+}
+
+.book-card {
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  border-radius: 15px;
+  gap: 10px;
+}
+
+.booktitle {
+  margin: 0;
+}
+
+.book-key {
+  font-weight: 600;
+}
+
+.book-read {
+  padding: 5px 30px;
+  margin: 10px 0;
+}
+
+.green-btn {
+  background-color: #b8e9a2;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.red-btn {
+  background-color: #e69696;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.book-delete {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fef;
+  color: #e42626;
+  border: none;
+  cursor: pointer;
+}
+
+.book-delete:hover {
+  background-color: #e42626;
+  color: #fff;
+}
