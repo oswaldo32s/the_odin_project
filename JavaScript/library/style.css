@@ -128,3 +128,16 @@ body {
   gap: 10px;
   flex-direction: column;
 }
+
+.close-btn {
+  padding: 10px 30px;
+  background-color: #e69696;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.close-btn:hover {
+  background-color: #eeb7b7;
+}

@@ -57,6 +57,11 @@ const bookContainer = document.querySelector(".bookContainer");
 const dialog = document.querySelector(".add-book-d");
 const addBookBtn = document.querySelector(".addBook");
 const submitBtn = document.querySelector(".book-form");
+const closeBtn = document.querySelector(".close-btn");
+
+closeBtn.addEventListener("click", () => {
+  dialog.close();
+});
 
 function showDialog() {
   dialog.showModal();
