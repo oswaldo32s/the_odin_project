@@ -38,8 +38,8 @@ const bookList = [
   },
 ];
 
-function Book(bookID, title, author, year, pages, read) {
-  this.bookID = bookID;
+function Book(title, author, year, pages, read) {
+  this.bookID = ++currentbookID;
   this.title = title;
   this.author = author;
   this.year = year;
@@ -49,25 +49,40 @@ function Book(bookID, title, author, year, pages, read) {
 
 bookList.forEach((item) => {
   books.push(
-    new Book(
-      currentbookID,
-      item.title,
-      item.author,
-      item.year,
-      item.pages,
-      item.read
-    )
+    new Book(item.title, item.author, item.year, item.pages, item.read)
   );
-  currentbookID++;
 });
 
-function addBook(title, author, year, pages, read) {
-  new Book(currentbookID, title, author, year, pages, read);
-  currentbookID++;
+const bookContainer = document.querySelector(".bookContainer");
+const dialog = document.querySelector(".add-book-d");
+const addBookBtn = document.querySelector(".addBook");
+const submitBtn = document.querySelector(".book-form");
+
+function showDialog() {
+  dialog.showModal();
 }
 
+function addBook(e) {
+  e.preventDefault();
+  const formData = Object.fromEntries(new FormData(submitBtn));
+  books.push(
+    new Book(
+      formData.bookName,
+      formData.author,
+      formData.year,
+      formData.pages,
+      formData.read ? true : false
+    )
+  );
+  dialog.close();
+  renderBooks();
+  submitBtn.reset();
+}
+
+addBookBtn.addEventListener("click", showDialog);
+submitBtn.addEventListener("submit", addBook);
+
 function renderBooks() {
-  const bookContainer = document.querySelector(".bookContainer");
   bookContainer.innerHTML = "";
 
   books.forEach((item) => {
@@ -92,7 +107,7 @@ function renderBooks() {
       item.read ? "green-btn" : "red-btn"
     }">${item.read ? "Read" : "Not read"}</button>
                 </div>
-                <button class="${item.bookID} book-delete">x</button>
+                <button class="${item.bookID} book-delete">×</button>
             </div>
     `;
     bookContainer.appendChild(container);

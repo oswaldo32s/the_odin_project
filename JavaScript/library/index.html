@@ -10,7 +10,30 @@
 <body>
     <header class="header">
         <h1>Library</h1>
+        <button class="addBook">Add New Book</button>
     </header>
+    <dialog class="add-book-d">
+        <form action="dialog" class="book-form">
+            <h2 class="form-title">New Book</h2>
+            <ul class="form-ul">
+                <li class="form-labels">
+                    <label for="bookName">Book Name:</label>
+                    <label for="author">Author:</label>
+                    <label for="year">Year:</label>
+                    <label for="pages">Pages:</label>
+                    <label for="read">Read:</label>
+                </li>
+                <li class="form-inputs">
+                    <input type="text" name="bookName" id="bookName" required>
+                    <input type="text" name="author" id="author" required>
+                    <input type="number" name="year" id="year" min="1800" required>
+                    <input type="number" name="pages" id="pages" min="1" required>
+                    <input type="checkbox" name="read" id="read">
+                </li>
+            </ul>
+            <button class="form-submit">Add</button>
+        </form>
+    </dialog>
     <main class="main">
         <div class="bookContainer">
         </div>

@@ -7,6 +7,30 @@ body {
   font-family: Ubuntu, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+}
+
+.header h1 {
+  margin: 5px;
+}
+
+.addBook, .form-submit {
+  padding: 10px 30px;
+  background-color: #b8e9a2;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.addBook:hover, .form-submit:hover {
+  background-color: #d3f1c5;
+}
+
 .bookContainer {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -66,4 +90,41 @@ body {
 .book-delete:hover {
   background-color: #e42626;
   color: #fff;
+}
+
+.add-book-d {
+  padding: 50px;
+  border: none;
+  border-radius: 10px;
+}
+
+.book-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-title {
+  margin: 0;
+}
+
+.form-ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 10px;
+}
+
+.form-labels {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: space-between;
+  font-weight: 600;
+}
+
+.form-inputs {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
 }
