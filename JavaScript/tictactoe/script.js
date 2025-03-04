@@ -10,6 +10,8 @@
 //=======================================
 
 const startBtn = document.querySelector(".players-name");
+const dialog = document.querySelector(".dialog");
+const scoreElement = document.querySelector(".score");
 
 const Gameboard = (function () {
   const board = ["", "", "", "", "", "", "", "", ""];
@@ -19,9 +21,16 @@ const Gameboard = (function () {
     board[index] = value;
   };
 
+  const restartBoard = function () {
+    board.forEach((value, index) => {
+      updateGameBoard("", index);
+    });
+  };
+
   return {
     getGameBoard,
     updateGameBoard,
+    restartBoard,
   };
 })();
 
@@ -37,6 +46,8 @@ const Game = (function () {
   let winner = false;
   let winnerPlayer;
 
+  const getPlayers = () => players;
+
   const winningCombinations = [
     [0, 1, 2], // Top row
     [3, 4, 5], // Middle row
@@ -49,7 +60,13 @@ const Game = (function () {
   ];
 
   function createPlayer(name, mark) {
-    return { name, mark };
+    let score = 0;
+    function increaseScore() {
+      score++;
+    }
+    const getScore = () => score;
+    const resetScore = () => (score = 0);
+    return { name, mark, getScore, increaseScore };
   }
 
   function checkWinner(index, playerMark) {
@@ -61,44 +78,39 @@ const Game = (function () {
       ) {
         winner = true;
         winnerPlayer = players[index].name;
-        return;
+        if (winner) {
+          players[index].increaseScore();
+          turn = 1;
+          Gameboard.restartBoard();
+        }
+      }
+      if (!Gameboard.getGameBoard().includes("")) {
+        turn = 1;
+        Gameboard.restartBoard();
       }
     });
   }
 
-  function playTurn() {
-    const position = prompt("what position you want to take?");
+  function playTurn(e) {
+    const position = e.target.classList[1];
     // check if position take
     if (Gameboard.getGameBoard()[position]) {
-      console.log("already taken");
     } else {
       Gameboard.updateGameBoard(players[turn].mark, position);
       checkWinner(turn, players[turn].mark);
       turn ? (turn = 0) : (turn = 1);
     }
+    Board.renderBoard();
   }
 
   const Start = function () {
-    Board.renderBoard();
-
     const formData = Object.fromEntries(new FormData(startBtn));
-    console.log(formData);
-    console.log(startBtn);
-
-    while (Gameboard.getGameBoard().includes("") && winner == false) {
-      playTurn();
-    }
-
-    if (winner) {
-      console.log(`${winnerPlayer} is the winner!!`);
-    }
-
-    if (!Gameboard.getGameBoard().includes("")) {
-      console.log(`It's a Draw!! Nice try!`);
-    }
+    players.push(createPlayer(formData.player1, formData.player1Mark));
+    players.push(createPlayer(formData.player2, formData.player2Mark));
+    Board.renderBoard();
   };
 
-  return { Start };
+  return { Start, playTurn, getPlayers };
 })();
 
 //=======================================
@@ -108,12 +120,31 @@ const Game = (function () {
 const Board = (function () {
   const boardElement = document.querySelector(".gameboard");
 
+  function renderScore() {
+    scoreElement.innerHTML = `
+    <span class="player-name">${Game.getPlayers()[0].name} ${
+      Game.getPlayers()[0].mark
+    }</span>
+    <span class="player-score">${Game.getPlayers()[0].getScore()}</span>
+    <span class="player-name">${Game.getPlayers()[1].name} ${
+      Game.getPlayers()[1].mark
+    }</span>
+    <span class="player-score">${Game.getPlayers()[1].getScore()}</span>`;
+  }
+
   function renderBoard() {
-    let gameSquares = "";
-    Gameboard.getGameBoard().forEach((slot) => {
-      gameSquares += `<div class="square">${slot}</div>`;
+    if (Game.getPlayers().length != 0) {
+      renderScore();
+    }
+    boardElement.innerHTML = "";
+    Gameboard.getGameBoard().forEach((slot, index) => {
+      let square = document.createElement("div");
+      square.classList.add("square");
+      square.classList.add(index);
+      square.textContent = slot;
+      square.addEventListener("click", Game.playTurn);
+      boardElement.appendChild(square);
     });
-    boardElement.innerHTML = gameSquares;
   }
 
   return { renderBoard };
@@ -121,5 +152,9 @@ const Board = (function () {
 
 startBtn.addEventListener("submit", (e) => {
   e.preventDefault();
+  dialog.close();
   Game.Start();
 });
+
+dialog.showModal();
+Board.renderBoard();
