@@ -1,4 +1,5 @@
 import { v4 as uuidv4 } from "uuid";
+import "./style.css";
 
 const tasks = [
   {
@@ -43,6 +44,8 @@ const tasks = [
   },
 ];
 
+const taskHeaders = ["Title", "Description", "Due Date", "Priority", "Project"];
+
 function createElement(tag, options = {}) {
   const element = document.createElement(tag);
   Object.entries(options).forEach(([key, value]) => {
@@ -63,20 +66,58 @@ if (!localStorage.tasks) {
 }
 
 function renderTasks(tasks) {
-  const body = document.body;
+  const table = document.querySelector(".task-table");
   if (tasks) {
     const taskContainer = createElement("div", { class: "task-contaner" });
     tasks.forEach((task) => {
       const tasksDiv = createElement("div", { class: "task-box" });
       Object.entries(task).forEach(([key, value]) => {
-        tasksDiv.appendChild(createElement("span", { text: value }));
+        if (key == "id") {
+          tasksDiv.classList.add(value);
+        } else {
+          tasksDiv.appendChild(createElement("span", { text: value }));
+        }
       });
       taskContainer.appendChild(tasksDiv);
     });
     // clear body
-    body.innerHTML = "";
-    body.appendChild(taskContainer);
+    table.innerHTML = "";
+    table.appendChild(taskContainer);
   }
 }
 
-renderTasks(JSON.parse(localStorage.tasks));
+function renderTaskTable(tasks, headers) {
+  const container = document.querySelector(".main-container");
+  const tableElement = createElement("table", {
+    class: "tasks-table",
+    html: `
+    <thead class="thead"></thead><tbody class="tbody"></tbody>`,
+  });
+  container.appendChild(tableElement);
+
+  const thead = document.querySelector(".thead");
+  const headerTr = createElement("tr");
+  const tbody = document.querySelector(".tbody");
+
+  thead.appendChild(headerTr);
+
+  headers.forEach((header) => {
+    const headerElement = createElement("th", { text: header });
+    headerTr.appendChild(headerElement);
+  });
+
+  tasks.forEach((task) => {
+    const tr = createElement("tr", { class: "task-row" });
+    Object.entries(task).forEach(([key, value]) => {
+      if (key == "id") {
+        tr.classList.add(value);
+      } else {
+        const td = createElement("td", { text: value });
+        tr.appendChild(td);
+      }
+    });
+    tbody.appendChild(tr);
+  });
+}
+
+renderTaskTable(JSON.parse(localStorage.tasks), taskHeaders);
