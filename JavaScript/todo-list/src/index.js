@@ -108,6 +108,7 @@ function renderTaskTable(tasks, headers) {
 
   tasks.forEach((task) => {
     const tr = createElement("tr", { class: "task-row" });
+    tr.addEventListener("click", renderTaskDetails);
     Object.entries(task).forEach(([key, value]) => {
       if (key == "id") {
         tr.classList.add(value);
@@ -120,4 +121,14 @@ function renderTaskTable(tasks, headers) {
   });
 }
 
-renderTaskTable(JSON.parse(localStorage.tasks), taskHeaders);
+function getTasks() {
+  return JSON.parse(localStorage.tasks);
+}
+
+function renderTaskDetails(e) {
+  const taskID = e.target.parentElement.classList[1];
+  const taskDetails = getTasks().find((task) => (task.id = taskID));
+  console.log(taskDetails);
+}
+
+renderTaskTable(getTasks(), taskHeaders);
