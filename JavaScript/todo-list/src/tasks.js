@@ -1,6 +1,7 @@
 import { createElement } from "./DOM";
 import { taskHeaders } from "./data";
 import { Projects } from "./projects";
+import { v4 as uuidv4 } from "uuid";
 
 const TasksDOM = (function () {
   const dialog = document.querySelector(".dialog");
@@ -8,6 +9,14 @@ const TasksDOM = (function () {
   const renderTaskTable = function (tasks = Tasks.getTasks()) {
     const container = document.querySelector(".main-container");
     container.innerHTML = "";
+
+    const addTaskBtn = createElement("button", {
+      class: "add-task-btn",
+      text: "Add New Task",
+      events: {
+        click: renderNewTask,
+      },
+    });
 
     const tableElement = createElement("table", {
       class: "tasks-table",
@@ -41,6 +50,9 @@ const TasksDOM = (function () {
       });
       tbody.appendChild(tr);
     });
+
+    container.appendChild(addTaskBtn);
+    dialog.close();
   };
 
   const renderTaskDetails = function (e) {
@@ -74,20 +86,87 @@ const TasksDOM = (function () {
         click: renderTaskEdit,
       },
     });
+    dialog.innerHTML = "";
     dialog.appendChild(dClose);
+    dContainer.appendChild(editBtn);
     dialog.appendChild(dContainer);
-    dialog.appendChild(editBtn);
     dialog.showModal();
   };
+
+  function renderNewTask() {
+    const dClose = createElement("button", {
+      class: "close-d",
+      text: "×",
+      events: {
+        click: function () {
+          dialog.close();
+        },
+      },
+    });
+
+    let projects = "";
+    Projects.getProjects().forEach((project) => {
+      projects += `<option value="${project.id}">${project.name}</option>`;
+    });
+    const taskForm = createElement("form", {
+      class: `task-form`,
+      html: `
+          <div class="task-form-div">
+              <label for="title" class="task-label">Title</label>
+              <input type="text" name="title" id="title"">
+          </div>
+          <div class="task-form-div">
+              <label for="description" class="task-label">Description</label>
+              <textarea name="description" id="description"></textarea>
+          </div>
+          <div class="task-form-div">
+              <label for="dueDate" class="task-label">Due Date</label>
+              <input type="date" name="dueDate" id="dueDate">
+          </div>
+          <div class="task-form-div">
+              <label for="priority" class="task-label">Priority</label>
+              <select name="priority" id="priority">
+                <option value="low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+              </select>
+          </div>
+          <div class="task-form-div">
+              <label for="project" class="task-label">Project</label>
+              <select name="project" id="project">
+                ${projects}
+              </select>
+          </div>`,
+      events: {
+        submit: Tasks.addTask,
+      },
+    });
+
+    const addTaskBtn = createElement("button", {
+      class: "add-task-btn",
+      text: "Add",
+    });
+
+    dialog.innerHTML = "";
+    dialog.appendChild(dClose);
+    taskForm.appendChild(addTaskBtn);
+    dialog.appendChild(taskForm);
+    dialog.showModal();
+    //taskForm.addEventListener("submit", Tasks.addTask);
+  }
 
   const renderTaskEdit = function (e) {
     const taskID = e.target.classList[0];
     const taskDetails = Tasks.getTasks().find((task) => task.id == taskID);
+    const dContainer = document.querySelector(".d-container");
+
     const buttonContainer = createElement("div", { class: "btn-container" });
+
     const updateBtn = createElement("button", {
       text: "Update",
       class: `${taskDetails.id} form-btn`,
     });
+
     const deleteBtn = createElement("button", {
       text: "delete",
       class: `${taskDetails.id} form-btn`,
@@ -95,10 +174,12 @@ const TasksDOM = (function () {
         type: "button",
       },
     });
+
     let projects = "";
     Projects.getProjects().forEach((project) => {
       projects += `<option value="${project.id}">${project.name}</option>`;
     });
+
     const taskForm = createElement("form", {
       class: `${taskDetails.id} task-form`,
       html: `
@@ -154,6 +235,13 @@ const Tasks = (function () {
   function deleteTask(e) {
     e.preventDefault();
     console.log("it works", e.target.classList[0]);
+
+    const taskID = e.target.classList[0];
+    const newTasks = getTasks();
+    const taskIndex = getTasks().findIndex((task) => task.id == taskID);
+    newTasks.splice(taskIndex, 1);
+    localStorage.setItem("tasks", JSON.stringify(newTasks));
+    TasksDOM.renderTaskTable();
   }
 
   function createTask(
@@ -181,25 +269,47 @@ const Tasks = (function () {
     const tasks = getTasks();
     const taskIndex = tasks.findIndex((task) => task.id == taskID);
     const formData = Object.fromEntries(new FormData(e.target));
+    const previousProject = Projects.getProjects().find(
+      (project) => project.id == formData.project
+    );
     const updatedTask = createTask(
       formData.title,
       formData.description,
       formData.dueDate,
       formData.priority,
       formData.project,
-      getProjects().find((project) => project.id == formData.project).name
+      previousProject ? previousProject.name : ""
     );
     tasks[taskIndex] = updatedTask;
 
     localStorage.setItem("tasks", JSON.stringify(tasks));
-    renderTaskTable(getTasks(), taskHeaders);
-    dialog.close();
+    TasksDOM.renderTaskTable(getTasks(), taskHeaders);
+  }
+
+  function addTask(e) {
+    e.preventDefault();
+
+    const formData = Object.fromEntries(new FormData(e.target));
+    const newTask = createTask(
+      formData.title,
+      formData.description,
+      formData.dueDate,
+      formData.priority,
+      formData.project,
+      Projects.getProjects().find((project) => project.id == formData.project)
+        .name
+    );
+
+    localStorage.setItem("tasks", JSON.stringify(getTasks().concat(newTask)));
+    TasksDOM.renderTaskTable(getTasks(), taskHeaders);
   }
 
   return {
     getTasks,
     createTask,
     updateTask,
+    deleteTask,
+    addTask,
   };
 })();
 export { TasksDOM, Tasks };

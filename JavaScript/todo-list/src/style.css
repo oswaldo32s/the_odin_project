@@ -12,6 +12,9 @@ body {
 
 .main-container {
   padding: 30px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .tasks-table {
@@ -25,7 +28,7 @@ body {
 }
 
 th, td {
-  border: 1px solid lightgray;
+  border: 1px solid #525a75;
   padding: 8px 10px;
 }
 
@@ -105,17 +108,18 @@ th, td {
   gap: 20px;
 }
 
-.edit-btn, .form-btn {
-  border: 1px solid white;
+.edit-btn, .form-btn, .add-project-button, .add-task-btn {
+  border: 1px solid #525a75;
   border-radius: 5px;
   padding: 5px 20px;
   font-weight: 600;
   color: white;
   background-color: #36373a;
   width: 100%;
+  margin-top: 20px;
 }
 
-.edit-btn:hover, .form-btn:hover {
+.edit-btn:hover, .form-btn:hover, .add-project-button:hover, .add-task-btn:hover {
   background-color: #45474b;
   cursor: pointer;
 }
@@ -148,4 +152,34 @@ th, td {
 
 .li-nav:hover {
   background-color: #525a75;
+}
+
+.project-delete-btn {
+  background-color: #404555;
+  border: 1px solid #525a75;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.project-delete-btn:hover {
+  background-color: #8a5757;
+}
+
+.add-project-btn {
+  background-color: #404555;
+  border: 1px solid #525a75;
+  border-radius: 5px;
+  padding: 5px;
+  color: white;
+  margin: 10px 30px 0 30px;
+}
+
+.add-project-btn:hover {
+  background-color: #525a75;
+}
+
+.add-project-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
