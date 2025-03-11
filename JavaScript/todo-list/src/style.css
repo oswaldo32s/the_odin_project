@@ -37,6 +37,28 @@ th, td {
   cursor: pointer;
 }
 
+.priority-td {
+  text-align: center;
+}
+
+.task-priority-High {
+  background-color: #c54c4c;
+  padding: 2px 20px;
+  border-radius: 15px;
+}
+
+.task-priority-Medium {
+  background-color: #b86230;
+  padding: 2px 20px;
+  border-radius: 15px;
+}
+
+.task-priority-Low {
+  background-color: #2c7729;
+  padding: 2px 20px;
+  border-radius: 15px;
+}
+
 .dialog {
   border: none;
   border-radius: 20px;

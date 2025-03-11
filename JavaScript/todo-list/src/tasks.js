@@ -32,6 +32,17 @@ const TasksDOM = (function () {
               childElements: Object.entries(task)
                 .filter((x) => x[0] !== "id" && x[0] !== "projectID")
                 .map(([key, value]) => {
+                  if (key == "priority") {
+                    return createElement("td", {
+                      class: "priority-td",
+                      childElements: [
+                        createElement("span", {
+                          text: value,
+                          class: `task-priority-${value}`,
+                        }),
+                      ],
+                    });
+                  }
                   return createElement("td", { text: value });
                 }),
             })
@@ -54,7 +65,7 @@ const TasksDOM = (function () {
   };
 
   const renderTaskDetails = function (e) {
-    const taskID = e.target.parentElement.classList[1];
+    const taskID = e.target.closest("tr").classList[1];
     const taskDetails = Tasks.getTasks().find((task) => task.id == taskID);
 
     // Elements
@@ -124,7 +135,7 @@ const TasksDOM = (function () {
           <div class="task-form-div">
               <label for="priority" class="task-label">Priority</label>
               <select name="priority" id="priority">
-                <option value="low">Low</option>
+                <option value="Low">Low</option>
                 <option value="Medium">Medium</option>
                 <option value="High">High</option>
               </select>
@@ -197,7 +208,7 @@ const TasksDOM = (function () {
               <label for="priority" class="task-label">Priority</label>
               <select name="priority" id="priority">
                 <option value="${taskDetails.priority}">${taskDetails.priority}</option>
-                <option value="low">Low</option>
+                <option value="Low">Low</option>
                 <option value="Medium">Medium</option>
                 <option value="High">High</option>
               </select>
