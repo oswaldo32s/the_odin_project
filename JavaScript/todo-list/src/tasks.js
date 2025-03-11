@@ -5,10 +5,40 @@ import { v4 as uuidv4 } from "uuid";
 
 const TasksDOM = (function () {
   const dialog = document.querySelector(".dialog");
+  const container = document.querySelector(".main-container");
 
   const renderTaskTable = function (tasks = Tasks.getTasks()) {
-    const container = document.querySelector(".main-container");
+    // Clear the container if there was alrady existing elements
     container.innerHTML = "";
+
+    const tableElement = createElement("table", {
+      class: "tasks-table",
+      childElements: [
+        createElement("thead", {
+          class: "thead",
+          childElements: taskHeaders.map((header) =>
+            createElement("th", { text: header })
+          ),
+        }),
+
+        createElement("tbody", {
+          class: "tbody",
+          childElements: tasks.map((task) =>
+            createElement("tr", {
+              class: `task-row ${task.id}`,
+              events: {
+                click: renderTaskDetails,
+              },
+              childElements: Object.entries(task)
+                .filter((x) => x[0] !== "id" && x[0] !== "projectID")
+                .map(([key, value]) => {
+                  return createElement("td", { text: value });
+                }),
+            })
+          ),
+        }),
+      ],
+    });
 
     const addTaskBtn = createElement("button", {
       class: "add-task-btn",
@@ -18,39 +48,7 @@ const TasksDOM = (function () {
       },
     });
 
-    const tableElement = createElement("table", {
-      class: "tasks-table",
-      html: `
-      <thead class="thead"></thead><tbody class="tbody"></tbody>`,
-    });
     container.appendChild(tableElement);
-
-    const thead = document.querySelector(".thead");
-    const headerTr = createElement("tr");
-    const tbody = document.querySelector(".tbody");
-
-    thead.appendChild(headerTr);
-
-    taskHeaders.forEach((header) => {
-      const headerElement = createElement("th", { text: header });
-      headerTr.appendChild(headerElement);
-    });
-
-    tasks.forEach((task) => {
-      const tr = createElement("tr", { class: "task-row" });
-      tr.addEventListener("click", renderTaskDetails);
-      Object.entries(task).forEach(([key, value]) => {
-        if (key == "id") {
-          tr.classList.add(value);
-        } else if (key == "projectID") {
-        } else {
-          const td = createElement("td", { text: value });
-          tr.appendChild(td);
-        }
-      });
-      tbody.appendChild(tr);
-    });
-
     container.appendChild(addTaskBtn);
     dialog.close();
   };
@@ -234,7 +232,6 @@ const Tasks = (function () {
 
   function deleteTask(e) {
     e.preventDefault();
-    console.log("it works", e.target.classList[0]);
 
     const taskID = e.target.classList[0];
     const newTasks = getTasks();
