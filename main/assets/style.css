@@ -16,8 +16,14 @@ h1 {
   margin: 0;
 }
 
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* Limit all website to 90ch */
-.header {
+.header, .home {
   width: 90ch;
 }
 
@@ -71,6 +77,7 @@ h1 {
 .dropdown-list {
   padding: 0;
   height: 0;
+  width: 0;
   overflow: hidden;
 }
 
@@ -80,6 +87,7 @@ h1 {
 }
 
 .show {
+  position: absolute;
   background-color: #3e494b;
   display: flex;
   flex-direction: column;
@@ -89,4 +97,44 @@ h1 {
 
 .dropdown-list-item:hover {
   background-color: #535f61;
+}
+
+/* SLIDE SHOW */
+
+.slideshow {
+  display: flex;
+  align-items: center;
+}
+
+.slides-container {
+  width: 100%;;
+  display: flex;
+}
+
+.slide-button {
+  color: #DDD;
+  height: 3rem;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-weight: 700;
+  width: 30px;
+  cursor: pointer;
+  transition: font-size 0.3s;
+}
+
+.slide-button:hover {
+  font-size: 1.3rem;
+  background-color: #1e2020;
+  transition: font-size 0.3s;
+}
+
+.slide {
+  flex: 0;
+  width: 0;
+  object-fit:cover;
+
+}
+
+.slide.active {
+  flex: 1;
 }

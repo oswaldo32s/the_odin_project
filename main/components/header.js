@@ -1,5 +1,6 @@
 import dropDownMenu from "./dropdown.js";
 import createElement from "../functions/elements.js";
+import { projects } from "../assets/data.js";
 
 export default function header() {
   const header = createElement("header", {
@@ -27,32 +28,7 @@ export default function header() {
                       }),
                     ],
                   }),
-                  dropDownMenu("Projects", [
-                    {
-                      name: "Calculator",
-                      link: "https://oswaldo32s.github.io/the_odin_project/Foundations/calculator/index.html",
-                    },
-                    {
-                      name: "Etch-a-Sketch",
-                      link: "https://oswaldo32s.github.io/the_odin_project/Foundations/etch-a-sketch/index.html",
-                    },
-                    {
-                      name: "Rock Paper Scissors",
-                      link: "https://oswaldo32s.github.io/the_odin_project/Foundations/rock-paper-scissors/index.html",
-                    },
-                    {
-                      name: "To Do List",
-                      link: "https://oswaldo32s.github.io/the_odin_project/JavaScript/todo-list/dist/index.html",
-                    },
-                    {
-                      name: "Tic Tac Toe",
-                      link: "https://oswaldo32s.github.io/the_odin_project/JavaScript/tictactoe/index.html",
-                    },
-                    {
-                      name: "Library",
-                      link: "https://oswaldo32s.github.io/the_odin_project/JavaScript/library/index.html",
-                    },
-                  ]),
+                  dropDownMenu("Projects", projects),
                   createElement("li", {
                     class: "navigation-list-item",
                     childElements: [
