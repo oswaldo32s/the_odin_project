@@ -27,6 +27,11 @@ export default function slideShow(object = []) {
 
   function renderSlides() {
     const slideContainer = document.querySelector(".slides-container");
+
+    if (!slideContainer) {
+      clearInterval(slideInterval);
+      return;
+    }
     slideContainer.innerHTML = "";
 
     object.forEach((item, index) => {
