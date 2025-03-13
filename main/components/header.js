@@ -1,6 +1,7 @@
 import dropDownMenu from "./dropdown.js";
 import createElement from "../functions/elements.js";
 import { projects } from "../assets/data.js";
+import home from "./home.js";
 
 export default function header() {
   const header = createElement("header", {
@@ -25,6 +26,12 @@ export default function header() {
                       createElement("button", {
                         class: "navigation-button",
                         text: "Home",
+                        events: {
+                          click: () => {
+                            document.querySelector(".main").innerHTML = "";
+                            document.querySelector(".main").appendChild(home());
+                          },
+                        },
                       }),
                     ],
                   }),
