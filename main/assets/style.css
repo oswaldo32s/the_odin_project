@@ -16,9 +16,9 @@ h1 {
   margin: 0;
 }
 
-/* Limit all website to 80ch */
+/* Limit all website to 90ch */
 .header {
-  width: 80ch;
+  width: 90ch;
 }
 
 .header {
@@ -54,7 +54,7 @@ h1 {
   background-color: #3e494b;
   border: none;
   color: #DDD;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
   height: 100%;
   width: 100%;
@@ -72,7 +72,6 @@ h1 {
   padding: 0;
   height: 0;
   overflow: hidden;
-  transition: height 0.5 ease-in;
 }
 
 .dropdown-list-link {
