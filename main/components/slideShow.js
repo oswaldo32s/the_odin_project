@@ -1,4 +1,4 @@
-import createElement from "../functions/elements.js";
+import { createElement } from "../functions/elements.js";
 
 export default function slideShow(object = []) {
   const itemCount = object.length - 1;

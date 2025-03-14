@@ -1,4 +1,4 @@
-import createElement from "../functions/elements.js";
+import { createElement } from "../functions/elements.js";
 import slideShow from "./slideShow.js";
 import { projects } from "../assets/data.js";
 

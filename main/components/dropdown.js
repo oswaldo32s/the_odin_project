@@ -1,4 +1,4 @@
-import createElement from "../functions/elements.js";
+import { createElement } from "../functions/elements.js";
 
 export default function dropDownMenu(name, dropDownList = []) {
   function toggleDropDown() {
@@ -16,21 +16,36 @@ export default function dropDownMenu(name, dropDownList = []) {
 
   const dropDownUl = createElement("ul", {
     class: "dropdown-list",
-    childElements: dropDownList.map((element) =>
-      createElement("li", {
-        class: "dropdown-list-item",
-        childElements: [
-          createElement("a", {
-            class: "dropdown-list-link",
-            text: element.name,
-            attribute: {
-              href: element.link,
-              target: "_blank",
-            },
-          }),
-        ],
-      })
-    ),
+    childElements: dropDownList.map((element) => {
+      if (typeof element.link == "string") {
+        return createElement("li", {
+          class: "dropdown-list-item",
+          childElements: [
+            createElement("a", {
+              class: "dropdown-list-link",
+              text: element.name,
+              attribute: {
+                href: element.link,
+                target: "_blank",
+              },
+            }),
+          ],
+        });
+      } else if (typeof element.link == "function") {
+        return createElement("li", {
+          class: "dropdown-list-item",
+          childElements: [
+            createElement("button", {
+              class: "dropdown-list-button",
+              text: element.name,
+              events: {
+                click: element.link,
+              },
+            }),
+          ],
+        });
+      }
+    }),
   });
 
   const dropDownMenu = createElement("div", {

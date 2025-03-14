@@ -1,4 +1,4 @@
-export default function createElement(tag, options = {}) {
+function createElement(tag, options = {}) {
   const element = document.createElement(tag);
   Object.entries(options).forEach(([key, value]) => {
     if (key == "text") {
@@ -22,3 +22,14 @@ export default function createElement(tag, options = {}) {
 
   return element;
 }
+
+async function renderInsideMain(page) {
+  const main = document.querySelector(".main");
+
+  if (main) {
+    main.innerHTML = "";
+    main.appendChild(await page);
+  }
+}
+
+export { createElement, renderInsideMain };

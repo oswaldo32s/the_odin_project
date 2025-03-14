@@ -1,4 +1,4 @@
-import createElement from "../functions/elements.js";
+import { createElement } from "../functions/elements.js";
 
 export default function signUp() {
   function inputField(label, validation) {

@@ -1,5 +1,5 @@
 import dropDownMenu from "./dropdown.js";
-import createElement from "../functions/elements.js";
+import { createElement, renderInsideMain } from "../functions/elements.js";
 import { projects } from "../assets/data.js";
 import home from "./home.js";
 import signUp from "./signup.js";
@@ -54,10 +54,7 @@ export default function header() {
                         text: "Sign Up",
                         events: {
                           click: () => {
-                            document.querySelector(".main").innerHTML = "";
-                            document
-                              .querySelector(".main")
-                              .appendChild(signUp());
+                            renderInsideMain(signUp());
                           },
                         },
                       }),

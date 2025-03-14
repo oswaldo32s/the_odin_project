@@ -16,6 +16,10 @@ a {
   width: 100%;
 }
 
+p {
+  margin: 0;
+}
+
 h1 {
   margin: 0;
 }
@@ -28,7 +32,7 @@ h1 {
 }
 
 /* Limit all website to 90ch */
-.header, .home, .signup {
+.header, .home, .signup, .weather {
   width: 90ch;
 }
 
@@ -102,6 +106,16 @@ h1 {
 
 .dropdown-list-item:hover {
   background-color: #535f61;
+}
+
+.dropdown-list-button {
+  background-color: #00000000;
+  border: none;
+  color: #DDD;
+  cursor: pointer;
+  display: flex;
+  padding: 10px 20px;
+  font-size: 1rem;
 }
 
 /* SLIDE SHOW */
@@ -218,4 +232,64 @@ h1 {
 
 .error.active {
   padding: 5px;
+}
+
+/* WEATHER APP */
+.weather {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.weather-location {
+  margin: 0;
+}
+
+.todays-temperature {
+  margin: 0;
+}
+
+.today-temp {
+  display: flex;
+  gap: 10px;
+}
+
+.todays-weather {
+  background-color: #3e494b;
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.weather-forecast {
+  background-color: #3e494b;
+  border-radius: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.weather-forecast-day {
+  width: 18%;
+  background-color: #83989c;
+  border-radius: 10px;
+  color: #262727;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.forecast-day {
+  text-align: center;
+  font-size: 25px;
+  font-weight: 700;
+  margin: 10px 0;
+}
+
+.day-temp {
+  font-weight: 600;
+  text-align: center;
+  margin: 10px 0;
 }

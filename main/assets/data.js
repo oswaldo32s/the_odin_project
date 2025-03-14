@@ -1,3 +1,6 @@
+import weather from "../components/weather/weather.js";
+import { renderInsideMain } from "../functions/elements.js";
+
 const projects = [
   {
     name: "Calculator",
@@ -27,6 +30,19 @@ const projects = [
   {
     name: "Library",
     link: "https://oswaldo32s.github.io/the_odin_project/JavaScript/library/index.html",
+    img: "./main/assets/images/library.jpeg",
+  },
+  {
+    name: "Weather App",
+    link: async () => {
+      const ddmenu = document.querySelector(".show");
+      const weatherElement = await weather();
+      if (ddmenu) {
+        renderInsideMain(weatherElement);
+        ddmenu.classList = "dropdown-list";
+      }
+      renderInsideMain(weatherElement);
+    },
     img: "./main/assets/images/library.jpeg",
   },
 ];
