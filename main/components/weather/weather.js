@@ -56,13 +56,16 @@ export default async function weather() {
           createElement("div", {
             class: "today-temp",
             childElements: [
-              createElement("h3", {
+              createElement("h4", {
+                class: "todays-temperature",
+                text:
+                  checkConditions(weatherData.currentConditions.conditions) +
+                  " " +
+                  weatherData.currentConditions.conditions,
+              }),
+              createElement("h4", {
                 class: "todays-temperature",
                 text: `${weatherData.currentConditions.temp} °C`,
-              }),
-              createElement("p", {
-                class: "weather-conditions",
-                text: `${weatherData.currentConditions.conditions}`,
               }),
             ],
           }),

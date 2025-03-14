@@ -13,7 +13,7 @@ async function renderWeb() {
       header(),
       createElement("main", {
         class: "main",
-        childElements: [await weather()],
+        childElements: [home()],
       }),
     ],
   });
