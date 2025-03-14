@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-color: #2f3738;
   box-sizing: border-box;
@@ -20,10 +24,11 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 30px 0;
 }
 
 /* Limit all website to 90ch */
-.header, .home {
+.header, .home, .signup {
   width: 90ch;
 }
 
@@ -137,4 +142,80 @@ h1 {
 
 .slide.active {
   flex: 1;
+}
+
+/* SIGN UP */
+
+.form-title {
+  margin: 0;
+  text-align: center;
+}
+
+.signup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signup-form {
+  width: 50%;
+  padding: 40px;
+  background-color: #3e494b;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.signup-label {
+  font-weight: 600;
+}
+
+.signup-input-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.signup-input {
+  background-color: #e8fbff;
+  padding: 7px;
+  border: none;
+  border-radius: 7px;
+}
+
+.signup-input.error-input {
+  border-radius: 0 0 7px 7px;
+}
+
+.signup-submit {
+  background-color: #d8b540;
+  padding: 12px 0;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.signup-submit:hover {
+  background-color: #ebcf73;
+}
+
+.error {
+  width: 100%;
+  padding: 0;
+  font-size: 80%;
+  color: white;
+  background-color: #900;
+  border-radius:7px 7px 0 0;
+  box-sizing: border-box;
+}
+
+.error.active {
+  padding: 5px;
 }
