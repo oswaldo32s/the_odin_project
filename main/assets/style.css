@@ -33,7 +33,9 @@ h1 {
 
 /* Limit all website to 90ch */
 .header, .home, .signup, .weather {
-  width: 90ch;
+  max-width: 90ch;
+  width: 100%;
+  padding: 0 30px;
 }
 
 .header {
@@ -55,6 +57,7 @@ h1 {
 
 .app-navigation {
   height: 100%;
+  display: flex;
 }
 
 .navigation-list {
@@ -71,7 +74,7 @@ h1 {
   color: #DDD;
   font-size: 1rem;
   font-weight: 600;
-  height: 100%;
+  height: 60px;
   width: 100%;
   padding: 10px 20px;
 }
@@ -79,6 +82,10 @@ h1 {
 .navigation-button:hover {
   background-color: #535f61;
   cursor: pointer;
+}
+
+.small-navigation-button {
+  display: none;
 }
 
 /* DROP DOWN STYLE */
@@ -292,4 +299,68 @@ h1 {
   font-weight: 600;
   text-align: center;
   margin: 10px 0;
+}
+
+@media only screen and (max-width: 750px) {
+  .navigation-list {
+    width: 0;
+    overflow: hidden;
+  }
+
+  .navigation-list.active {
+    background-color: #3e494b;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+
+  .signup-form {
+    width: 100%;
+  }  
+
+  .show {
+    position:static;
+    background-color: #3e494b;
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+  }
+
+
+  .small-navigation-button {
+    display: block;
+    background-color: #3e494b;
+    border: none;
+    font-size: 1rem;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+
+  .dropdown-list-item {
+    width: 100%;
+  }
+  
+  .dropdown-list-button {
+    width: 100%;
+    display: block;
+    text-align: center;
+  }
+
+  .dropdown-list-link {
+    display: block;
+    text-align: center;
+  }
+}
+
+
+
+@media only screen and (max-width: 400px) {
+  .app-title {
+    display: none;
+  }
 }

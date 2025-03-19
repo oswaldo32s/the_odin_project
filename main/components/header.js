@@ -12,12 +12,26 @@ export default function header() {
         class: "header",
         childElements: [
           createElement("h1", {
+            class: "app-logo",
+            text: "⚡",
+          }),
+          createElement("h1", {
             class: "app-title",
-            text: "⚡ The Odin Project",
+            text: "The Odin Project",
           }),
           createElement("nav", {
             class: "app-navigation",
             childElements: [
+              createElement("button", {
+                class: "small-navigation-button",
+                text: "🟰",
+                events: {
+                  click: () => {
+                    const nav = document.querySelector(".navigation-list");
+                    nav.classList.toggle("active");
+                  },
+                },
+              }),
               createElement("ul", {
                 class: "navigation-list",
                 childElements: [
