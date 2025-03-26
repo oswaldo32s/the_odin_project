@@ -72,7 +72,8 @@ export default function WorkExperience({experience, handleOnChange, handleOnClic
                 </div>
               </form>
       : 
-      experience.map((work, index) => {
+      <div onTouchStart={() => hover ? setHover(false) : setHover(true)}>{      
+        experience.map((work, index) => {
         return (
           <WorkBlock
             key={index}
@@ -82,7 +83,9 @@ export default function WorkExperience({experience, handleOnChange, handleOnClic
             handleDelete={handleDelete}
           />
         )
-      })}
+        })}
+      </div>
+}
           {hover && !editable && <button onClick={toggleEditable}>Add</button>}
     </section>
   )

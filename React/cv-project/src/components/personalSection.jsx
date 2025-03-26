@@ -66,7 +66,8 @@ export default function PersonalSection({personalData, handleOnChange}) {
         <div onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
         className={styles.personalSection}>
-        <div className={styles.personalSectionContainer}>
+        <div className={styles.personalSectionContainer}
+        onTouchStart={() => hover ? setHover(false) : setHover(true)}>
           <h2>{personalData.firstName + ' ' + personalData.lastName}</h2>
           <h2>{personalData.profession}</h2>
           <p>{personalData.phoneNumber}</p>

@@ -17,12 +17,12 @@
 
 .educationUniversity {
   font-size: 1.1rem;
+  font-weight: 500;
   margin: 5px;
 }
 
 .educationDateSection {
   display: flex;
-  font-weight: 700;
   gap: 20px;
 }
 
@@ -60,4 +60,27 @@
   width: 100%;
   text-align: center;
   margin: 5px;
+}
+
+@media only screen and (max-width: 700px) {
+ .educationBlockContainer {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+ } 
+
+
+ .educationDegree {
+  font-size: 1.05rem;
+  font-weight: 600;
+ }
+
+ .educationUniversity {
+  font-size: 1rem;
+  font-weight: 600;
+ }
+
+ .educationDateSection {
+  font-weight: 500;
+ }
 }

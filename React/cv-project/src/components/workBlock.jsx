@@ -41,7 +41,8 @@ export default function WorkBlock({index, data, handleOnChange, handleDelete}) {
       onMouseLeave={() => setHover(false)}
       className={styles.workBlock}
       >
-        <div className={styles.workBlockContainer}>
+        <div className={styles.workBlockContainer}
+        onTouchStart={() => hover ? setHover(false) : setHover(true)}>
           <div className={styles.workBlock}>
             <div>
               <h2 className={styles.workPosition}>{data.position}</h2>
