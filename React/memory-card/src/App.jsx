@@ -3,6 +3,8 @@ import './app.css'
 
 export function App() {
 
+  const PAIR_COUNT = 5
+
   function shuffleArray(array) {
     for (var i = array.length - 1; i > 0; i--) {
       var j = Math.floor(Math.random() * (i + 1));
@@ -26,7 +28,7 @@ export function App() {
   }
 
   function checkWinner(newScore) {
-    if(newScore === 10) setWinner(true)
+    if(newScore === PAIR_COUNT) setWinner(true)
   }
 
   function playRound(newCard, index) {
@@ -54,7 +56,7 @@ export function App() {
   const [winner, setWinner] = useState(false)
 
   useEffect(() => {
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=10&offset=0')
+    fetch(`https://pokeapi.co/api/v2/pokemon?limit=${PAIR_COUNT}&offset=0`)
       .then(res => res.json())
       .then(async (data) => {
         const cards = data.results;
@@ -72,7 +74,7 @@ export function App() {
   
 
   return (
-    <main>
+    <main className="memoryCard">
       <h1>Memory Card</h1>
       <h2>{`Score: ${score}`}</h2>
       {
@@ -87,19 +89,20 @@ export function App() {
           deck && 
           deck.map((card, index) => (
             <div 
-            style={
-              (discoveredCards.includes(card.name) || index === lastPick[1]) ?
-              {
-                backgroundImage: `url(${card.url})`
-              } :
-              null
-            }
-            className="card"
+            className='card'
             key={index}
             onClick={() => {
               playRound(card.name, index)
             }}
             >
+              <div className={(discoveredCards.includes(card.name) || index === lastPick[1]) ? 'cardContent active' : 'cardContent'}>
+              {(discoveredCards.includes(card.name) || index === lastPick[1]) && 
+             <>
+                <img src={card.url} alt="pokemon image" />
+                <h3>{card.name}</h3>
+             </>
+             }
+             </div>
             </div>
           ))
         }
