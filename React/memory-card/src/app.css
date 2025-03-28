@@ -1,0 +1,11 @@
+.cardsContainer {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 20px;
+}
+
+.card {
+  width: 80px;
+  height: 100px;
+  background-color: rgb(62, 179, 130);
+}
