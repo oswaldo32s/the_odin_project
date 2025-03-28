@@ -19,8 +19,14 @@ export function App() {
     setDiscoveredCards([])
   }
 
-  function showCard() {
-    
+  function restartGame() {
+    setDeck(prev => shuffleArray([...prev]))
+    resetGame()
+    setWinner(false)
+  }
+
+  function checkWinner(newScore) {
+    if(newScore === 10) setWinner(true)
   }
 
   function playRound(newCard, index) {
@@ -31,9 +37,11 @@ export function App() {
     } else if(lastPick[1] === index) {
       return
     }else if(newCard === lastPick[0]) {
-      setScore(prev => prev + 1)
+      const newScore = score + 1
+      setScore(newScore)
       setDiscoveredCards(prev => [...prev, newCard])
       setLastPick([])
+      checkWinner(newScore)
     } else {
       resetGame()
     }
@@ -43,6 +51,7 @@ export function App() {
   const [score, setScore] = useState(0)
   const [lastPick, setLastPick] = useState([])
   const [discoveredCards, setDiscoveredCards] = useState([])
+  const [winner, setWinner] = useState(false)
 
   useEffect(() => {
     fetch('https://pokeapi.co/api/v2/pokemon?limit=10&offset=0')
@@ -66,13 +75,20 @@ export function App() {
     <main>
       <h1>Memory Card</h1>
       <h2>{`Score: ${score}`}</h2>
+      {
+        winner && 
+        <div>
+          <h3>You won!!</h3>
+          <button onClick={restartGame}>Play Again</button>
+        </div>
+      }
       <section className="cardsContainer">
         {
           deck && 
           deck.map((card, index) => (
             <div 
             style={
-              discoveredCards.includes(card.name) ?
+              (discoveredCards.includes(card.name) || index === lastPick[1]) ?
               {
                 backgroundImage: `url(${card.url})`
               } :
@@ -88,6 +104,7 @@ export function App() {
           ))
         }
       </section>
+      <button onClick={restartGame}>Restart Game</button>
     </main>
   )
 }
