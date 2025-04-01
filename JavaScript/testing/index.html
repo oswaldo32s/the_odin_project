@@ -3,74 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module" src="./battleship.js" defer></script>
     <title>Battleship Game</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        .board-container {
-            display: flex;
-            justify-content: center;
-            gap: 50px;
-            margin-top: 20px;
-        }
-        .board {
-            display: grid;
-            grid-template-columns: repeat(10, 40px);
-            grid-template-rows: repeat(10, 40px);
-            gap: 2px;
-            border: 2px solid black;
-        }
-        .cell {
-            width: 40px;
-            height: 40px;
-            background-color: lightblue;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 20px;
-        }
-        .cell.ship {
-            background-color: gray;
-        }
-        .cell.miss {
-            background-color: white;
-        }
-        .cell.hit {
-            background-color: red;
-        }
-        button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-        }
-    </style>
 </head>
 <body>
-    <h1>Battleship Game</h1>
-    <p>Click on the AI's board to attack.</p>
-    <div class="board-container">
-        <div>
-            <h2>Player Board</h2>
-            <div id="player-board" class="board"></div>
-        </div>
-        <div>
-            <h2>AI Board</h2>
-            <div id="ai-board" class="board"></div>
-        </div>
+    <div id="app">
+
     </div>
-    <button id="restart-game">Restart Game</button>
-
-    <script type="module">
-        import { GameController } from './battleship.js';
-
-        let game = new GameController();
-
-        document.getElementById("restart-game").addEventListener("click", () => {
-            game = new GameController();
-        });
-    </script>
 </body>
 </html>
