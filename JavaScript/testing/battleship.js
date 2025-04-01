@@ -1,5 +1,31 @@
+const createElement = function (tag, options = {}) {
+  const element = document.createElement(tag);
+  Object.entries(options).forEach(([key, value]) => {
+    if (key == "text") {
+      element.textContent = value;
+    } else if (key == "html") {
+      element.innerHTML = value;
+    } else if (key == "class") {
+      element.classList.add(...value.split(" "));
+    } else if (key == "attribute") {
+      Object.entries(value).forEach(([attributeKey, attributeValue]) => {
+        element.setAttribute(attributeKey, attributeValue);
+      });
+    } else if (key == "events") {
+      Object.entries(value).forEach(([eventKey, eventValue]) => {
+        element.addEventListener(eventKey, eventValue);
+      });
+    } else if (key == "childElements") {
+      value.forEach((childElement) => element.appendChild(childElement));
+    }
+  });
+
+  return element;
+};
+
 // Ship with length, hitCount, isSunk
 // hit function and sunk function
+// using Class since we'll need more than one
 
 export class Ship {
   constructor(length) {
@@ -16,12 +42,13 @@ export class Ship {
   }
 }
 
+// using Class since we'll need more than one
 export class GameBoard {
   constructor(size = 10) {
     this.size = size;
     this.board = Array.from({ length: size }, () => Array(size).fill(null));
-    this.missedShots = [];
-    this.attacksMade = [];
+    this.missedShots = new Set();
+    this.attacksMade = new Set();
     this.ships = [];
   }
 
@@ -40,7 +67,7 @@ export class GameBoard {
   }
 
   addShip(ship, row, col, isHorizontal = true) {
-    if (!this.isValidPlacement(ship, row, col, isHorizontal)) return;
+    if (!this.isValidPlacement(ship, row, col, isHorizontal)) return false;
 
     for (let i = 0; i < ship.length; i++) {
       this.board[row][col] = ship;
@@ -54,22 +81,18 @@ export class GameBoard {
   receiveAttack(row, col) {
     if (this.board[row][col] === null) {
       this.board[row][col] = "miss";
-      this.missedShots.push([row, col]);
+      this.missedShots.add(`${row}, ${col}`);
       return "miss";
     }
 
-    if (
-      this.attacksMade.some((arr) =>
-        arr.every((val, index) => val === [row, col][index])
-      )
-    ) {
+    if (this.attacksMade.has(`${row}, ${col}`)) {
       return "already attacked";
     }
 
     if (this.board[row][col] instanceof Ship) {
       const ship = this.board[row][col];
       ship.hit();
-      this.attacksMade.push([row, col]);
+      this.attacksMade.add(`${row}, ${col}`);
       return ship.isSunk() ? "sunk" : "hit";
     }
     return "invalid";
@@ -79,3 +102,81 @@ export class GameBoard {
     return this.ships.every((ship) => ship.isSunk());
   }
 }
+
+// using Class since we'll need more than one
+export class Player {
+  constructor(computer = true) {
+    this.computer = computer;
+    this.gameBoard = new GameBoard();
+  }
+
+  attackEnemy(EnemyBoard, row, col) {
+    return EnemyBoard.receiveAttack(row, col);
+  }
+}
+
+export const Game = (function () {
+  const TURNS = {
+    firstPlayer: "Player 1",
+    secondPlayer: "Computer",
+  };
+
+  const players = [];
+  let turn = TURNS.firstPlayer;
+
+  function StartGame() {
+    GameUI.renderPlayerCreation();
+
+    // Create Players first real Player then Computer
+    players.push(createPlayer(false));
+    players.push(createPlayer());
+
+    GameUI.renderBoard(players[0].gameBoard.board);
+    console.log(players);
+  }
+
+  function createPlayer(computer = true) {
+    return new Player(computer);
+  }
+
+  function createPlayerBoard() {}
+
+  return { StartGame };
+})();
+
+export const GameUI = (function () {
+  const app = document.getElementById("App");
+
+  function renderPlayerCreation() {
+    console.log(app);
+    app.appendChild(
+      createElement("div", {
+        childElements: [
+          createElement("button", {
+            text: "Start Game",
+          }),
+        ],
+      })
+    );
+    return true;
+  }
+
+  function renderBoard(PlayerBoard) {
+    const playerBoard = createElement("div", {
+      childElements: PlayerBoard.map((row, rowI) =>
+        createElement("div", {
+          class: "boardRow",
+          childElements: row.map((col, colI) => {
+            return createElement("div", {
+              class: `${rowI}-${colI} square`,
+            });
+          }),
+        })
+      ),
+    });
+
+    app.appendChild(playerBoard);
+  }
+
+  return { renderPlayerCreation, renderBoard };
+})();

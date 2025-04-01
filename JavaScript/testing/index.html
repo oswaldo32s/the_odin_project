@@ -3,11 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="module" src="./battleship.js" defer></script>
+    <script type="module" defer>
+        import { Game }from './battleship.js'
+        Game.StartGame();
+    </script>
     <title>Battleship Game</title>
+    <style>
+
+        .boardRow {
+            display: flex;
+        }
+
+        .square {
+            width: 30px;
+            height: 30px;
+            border: 1px solid gray;
+        }
+
+        .square:hover {
+            background-color: lightgray;
+        }
+    </style>
 </head>
 <body>
-    <div id="app">
+    <div id="App">
 
     </div>
 </body>
