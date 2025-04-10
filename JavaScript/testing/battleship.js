@@ -129,10 +129,10 @@ export const Game = (function () {
 
     // Create Players first real Player then Computer
     players.push(createPlayer(false));
+    players[0].gameBoard.addShip(new Ship(3), 0, 0, false);
     players.push(createPlayer());
-
+    console.log(players[0]);
     GameUI.renderBoard(players[0].gameBoard.board);
-    console.log(players);
   }
 
   function createPlayer(computer = true) {
@@ -148,17 +148,28 @@ export const GameUI = (function () {
   const app = document.getElementById("App");
 
   function renderPlayerCreation() {
-    console.log(app);
     app.appendChild(
       createElement("div", {
         childElements: [
           createElement("button", {
             text: "Start Game",
           }),
+          renderAddPlayerShip(),
         ],
       })
     );
     return true;
+  }
+
+  function renderAddPlayerShip() {
+    return createElement("div", {
+      class: "add-ship",
+      childElements: [
+        createElement("form", {
+          childElements: [],
+        }),
+      ],
+    });
   }
 
   function renderBoard(PlayerBoard) {
@@ -168,7 +179,12 @@ export const GameUI = (function () {
           class: "boardRow",
           childElements: row.map((col, colI) => {
             return createElement("div", {
-              class: `${rowI}-${colI} square`,
+              class: `${rowI}-${colI} square ${
+                col instanceof Ship ? "ship" : null
+              }`,
+              events: {
+                click: (e) => console.log(e.target),
+              },
             });
           }),
         })
