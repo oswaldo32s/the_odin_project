@@ -1,0 +1,12 @@
+.Home {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.container {
+  width: 90ch;
+}
+
+.listItem {
+  list-style: inside;
+}
