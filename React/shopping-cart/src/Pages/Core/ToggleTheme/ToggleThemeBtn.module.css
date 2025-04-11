@@ -1,0 +1,9 @@
+.themeSVG {
+  width: 20px;
+}
+
+.themeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

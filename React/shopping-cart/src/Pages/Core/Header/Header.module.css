@@ -1,0 +1,49 @@
+.header {
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.Container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90ch;
+}
+
+.logoSection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoSVG {
+  width: 2rem;
+}
+
+.logoName {
+  margin: 0;
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mainNav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.headerLink {
+  background-color: var(--accent);
+  padding: 10px;
+  border: 1px solid var(--accent);
+  border-radius: 7px;
+}
+
+.headerLink:hover {
+  background-color: var(--accent-hover);
+}

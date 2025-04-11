@@ -1,42 +1,85 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+html {
+  box-sizing: border-box;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+:root {
+  /* Light theme */
+  --light-bg: #f4f7f1;
+  --light-bg-box: #e0e6d5;
+  --light-text: #141414;
+  --light-accent: #7cae61;
+  --light-accent-hover: #68974e;
+
+  /* Dark theme */
+  --dark-bg: #1a1b19;
+  --dark-bg-box: #2d312a;
+  --dark-text: #eeeeee;
+  --dark-accent: #3c562e;
+  --dark-accent-hover: #50733f;
+}
+
+body {
+  /* Default to dark theme */
+  --bg: var(--dark-bg);
+  --bg-box: var(--dark-bg-box);
+  --text: var(--dark-text);
+  --accent: var(--dark-accent);
+  --accent-hover: var(--dark-accent-hover);
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: Ubuntu, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Oxygen, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+body.light {
+  /* Override with light theme */
+  --bg: var(--light-bg);
+  --bg-box: var(--light-bg-box);
+  --text: var(--light-text);
+  --accent: var(--light-accent);
+  --accent-hover: var(--light-accent-hover);
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+button {
+  background-color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 7px;
+  color: var(--text);
+  cursor: pointer;
+  padding: 10px 10px;
+}
+
+button:hover {
+  background-color: var(--accent-hover);
+}
+
+@media (prefers-color-scheme: light) {
+  body:not(.dark) {
+    /* Automatically apply light theme if user prefers light mode */
+    --bg: var(--light-bg);
+    --bg-box: var(--light-bg-box);
+    --text: var(--light-text);
+    --accent: var(--light-accent);
+    --accent-hover: var(--light-accent-hover);
   }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
