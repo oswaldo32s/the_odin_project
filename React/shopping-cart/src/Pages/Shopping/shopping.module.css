@@ -1,0 +1,80 @@
+.Shopping {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 90ch;
+}
+
+.shoppingContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-auto-rows: 450px;
+  gap: 20px;
+}
+
+.shoppingImgContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  width: 100%;
+  height: 200px;
+}
+
+.article {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.shoppingItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 20px;
+  background-color: var(--bg-box);
+  border-radius: 15px;
+}
+
+.shoppingItemImg {
+  height: 200px;
+  overflow: hidden;
+}
+
+.truncateTitle {
+  display: -webkit-box;
+  overflow: hidden;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.truncateDesc {
+  display: -webkit-box;
+  overflow: hidden;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.shoppingItemDesc,
+.shoppingItemTitle,
+.shoppingItemPrice {
+  margin: 5px 0;
+}
+
+.shoppingItemDesc {
+  font-size: 0.9em;
+}
+
+.shoppingItemPrice {
+  font-weight: 700;
+  font-size: 1.3em;
+}
