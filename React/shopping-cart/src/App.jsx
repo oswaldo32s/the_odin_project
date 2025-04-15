@@ -12,7 +12,6 @@ function App() {
       .then((response) => response.json())
       .then((data) => {
         setShoppingItems(data);
-        console.log(data);
       });
   }, []);
 

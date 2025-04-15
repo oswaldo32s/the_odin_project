@@ -1,16 +1,21 @@
 .Shopping {
   display: flex;
-  align-items: center;
   justify-content: center;
+  gap: 10px;
 }
 
 .container {
-  width: 90ch;
+  width: 110ch;
+}
+
+.shoppingNCart {
+  display: flex;
+  gap: 20px;
 }
 
 .shoppingContainer {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(212px, 1fr));
   grid-auto-rows: 450px;
   gap: 20px;
 }
@@ -66,7 +71,8 @@
 
 .shoppingItemDesc,
 .shoppingItemTitle,
-.shoppingItemPrice {
+.shoppingItemPrice,
+.cartItemCount {
   margin: 5px 0;
 }
 
@@ -77,4 +83,51 @@
 .shoppingItemPrice {
   font-weight: 700;
   font-size: 1.3em;
+}
+
+.cartSection {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.buttonSection {
+  display: flex;
+  gap: 5px;
+}
+
+.cartItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  padding: 15px;
+  width: 200px;
+  background-color: var(--bg-box);
+  border-radius: 15px;
+}
+.cartItemImg {
+  overflow: hidden;
+  height: 100px;
+}
+
+.cartImgContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  width: 100%;
+  height: 100px;
+}
+
+.cartArticle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cartItemCount {
+  font-size: 0.9em;
 }
