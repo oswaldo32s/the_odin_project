@@ -1,4 +1,4 @@
-import styles from "./shopping.module.css";
+import styles from "../shopping.module.css";
 
 export default function ShoppingItem({
   id,
