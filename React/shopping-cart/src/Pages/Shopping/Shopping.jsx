@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import styles from "./shopping.module.css";
-import CartItem from "./Cart/CartItem";
 import ShoppingSection from "./Shopping/ShoppingSection";
 import CartSection from "./Cart/CartSection";
 
