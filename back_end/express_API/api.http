@@ -1,0 +1,35 @@
+### Get all movies
+GET http://localhost:1234/movies
+
+### Get Movie by ID
+GET http://localhost:1234/movies/241bf55d-b649-4109-af7c-0e6890ded3fc
+
+### Get movies by Genre
+
+GET http://localhost:1234/movies?genre=Drama
+
+
+### Create a movie
+POST http://localhost:1234/movies
+Content-Type: application/json
+
+ {
+    "title": "La Red Social",
+    "year": 2010,
+    "director": "David Fincher",
+    "duration": 120,
+    "poster": "https://i.pinimg.com/originals/7e/37/b9/7e37b994b613e94cba64f307b1983e39.jpg",
+    "genre": [
+      "Biography",
+      "Drama"
+    ]
+  }
+
+### Update a movie partially
+PATCH http://localhost:1234/movies/5
+Content-Type: application/json
+
+{
+    "title": "Esto es una prueba",
+    "year": 2010
+}
